@@ -1,0 +1,76 @@
+@import 'tailwindcss';
+
+/**
+ * Sistema visual da Bazalá — directrizes de identidade.
+ *
+ * Proporção de uso: 60% areia/branco · 25% escuro · 10% principal · 5% acento.
+ * O laranja é acento, não campo. Grandes áreas em laranja quebram a proporção
+ * e cansam a leitura ao sol.
+ */
+@theme {
+  /* Paleta da identidade */
+  --color-primary: #f97316; /* Principal */
+  --color-dark: #163a3d; /* Escuro */
+  --color-sand: #f7efe2; /* Areia */
+  --color-paper: #ffffff; /* Branco */
+  --color-gold: #d8b26e; /* Acento discreto */
+
+  /*
+   * Derivados, não estão no guia.
+   *
+   * `primary-ink` existe porque #F97316 sobre branco dá 2,81:1 de contraste,
+   * abaixo dos 4,5:1 exigidos para texto normal. Este tom dá 5,21:1 e é
+   * indistinguível em texto fino. Usar SEMPRE que o laranja tiver de carregar
+   * texto pequeno sobre fundo claro.
+   */
+  --color-primary-ink: #c2410c;
+  /* Estado hover do botão primário — mais claro, como no guia. */
+  --color-primary-hover: #fb8b3f;
+
+  /* Texto secundário, 4,9:1 sobre areia. */
+  --color-mute: #54686a;
+  /* Linhas e limites, da família da areia. */
+  --color-rule: #e7decd;
+
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 0.75rem;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-dark);
+  font-family: var(--font-sans);
+  line-height: 1.55;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+/* Alvos de toque nunca abaixo de 44px: o dispositivo alvo é um Android de
+   gama média segurado com uma mão. */
+a,
+button,
+input,
+select {
+  min-height: 44px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-primary-ink);
+  outline-offset: 2px;
+}
