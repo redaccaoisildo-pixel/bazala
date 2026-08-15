@@ -45,19 +45,26 @@ export const PHASE_RATES: Record<Phase, CommissionRates> = {
 };
 
 /**
- * Não há taxa de fundador, e é deliberado.
+ * Anfitriões fundadores (§4.4): 3% em vez de 10%, permanentes, desde a
+ * primeira reserva. "Fica com 97%."
  *
- * Um desconto na comissão não vale nada para quem se está a recrutar, porque é
- * um desconto sobre reservas que ele ainda não tem — 10% de zero e 0% de zero
- * são o mesmo número. Só passa a valer depois de já lhe termos provado que
- * trazemos procura, e nessa altura já não era preciso.
+ * Não há isenção nas primeiras reservas, e é deliberado: um desconto sobre
+ * reservas que o anfitrião ainda não tem vale zero — 10% de zero e 0% de zero
+ * são o mesmo número. Uma taxa permanente mais baixa evita o degrau, mantém a
+ * informação sobre disposição para pagar, e nunca obriga a subir a comissão a
+ * ninguém, que é a razão pela qual a fase de lançamento é 10% e não 5%.
  *
- * O que recruta é a fotografia, o pagamento em 24 horas sem custo para ele, e
- * a própria taxa. Nenhum custa receita.
+ * Elegibilidade: primeiros 40 anfitriões, ou quem entrar nos primeiros 12
+ * meses, o que vier primeiro. O custo dilui-se com a escala.
  *
  * Excepções negociadas caso a caso vivem na tabela `host_commission_rates`,
  * com o motivo registado. São dados, não política.
  */
+export const FOUNDING = {
+  maxHosts: 40,
+  months: 12,
+  rates: { host: 0.03, guest: 0.06 } satisfies CommissionRates,
+};
 
 export type Quote = {
   nights: number;

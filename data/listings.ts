@@ -45,6 +45,13 @@ export type Listing = {
   requires4x4: boolean;
   amenities: string[];
   description: string;
+  /**
+   * Versão inglesa, quando o anfitrião a fornecer (§7.5). Se faltar, a página
+   * em inglês mostra o original com a nota de idioma — nunca uma tradução
+   * automática, que minaria o que a plataforma promete sobre a informação
+   * ser verdadeira.
+   */
+  descriptionEn?: string;
   /** Caminhos em /public/listings/. Vazio mostra um marcador. */
   photos: string[];
   hostFirstName: string;

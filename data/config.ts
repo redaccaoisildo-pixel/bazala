@@ -14,10 +14,14 @@ import type { Phase } from '@/lib/pricing';
 export const SITE = {
   /** Em prosa escreve-se com maiúscula; o logótipo é minúsculo (ver layout). */
   name: 'Bazalá',
-  tagline: 'Sinta-se em casa onde quer que vá.',
-  description:
-    'Alojamento em Moçambique reservado directamente com quem recebe. ' +
-    'Casas, guesthouses e pensões em Maputo, no Bilene, em Xai-Xai e na costa.',
+  description: {
+    pt:
+      'Alojamento em Moçambique reservado directamente com quem recebe. ' +
+      'Casas, guesthouses e pensões em Maputo, no Bilene, em Xai-Xai e na costa.',
+    en:
+      'Places to stay in Mozambique, booked with the people who host you. ' +
+      'Houses, guesthouses and small lodges in Maputo, Bilene, Xai-Xai and along the coast.',
+  },
   url: 'https://bazala.co.mz',
   locale: 'pt-MZ',
 } as const;

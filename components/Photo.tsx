@@ -10,16 +10,19 @@ import Image from 'next/image';
 export function Photo({
   src,
   alt,
+  label,
   priority = false,
 }: {
   src?: string;
   alt: string;
+  /** Texto do marcador, já no idioma da página. */
+  label: string;
   priority?: boolean;
 }) {
   if (!src) {
     return (
       <div className="flex aspect-[4/3] items-center justify-center rounded-[--radius-card] bg-sand text-sm text-mute">
-        Sem fotografia
+        {label}
       </div>
     );
   }

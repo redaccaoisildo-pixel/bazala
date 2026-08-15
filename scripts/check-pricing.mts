@@ -10,7 +10,7 @@
  * versão anterior da blueprint. Vale a pena mantê-la a correr.
  */
 
-import { IVA_RATE, PHASE_RATES, quote, type Phase } from '../lib/pricing.ts';
+import { FOUNDING, IVA_RATE, PHASE_RATES, quote, type Phase } from '../lib/pricing.ts';
 
 let failures = 0;
 
@@ -87,6 +87,32 @@ for (const phase of ['launch', 'mature'] as Phase[]) {
       `hóspede paga ${(q.guestTotal / 100).toFixed(2)}`,
   );
 }
+
+// ── Fundadores (§4.4) ────────────────────────────────────────────────────────
+console.log('\n§4.4 — anfitriões fundadores');
+const fund = quote(500_000, 3, FOUNDING.rates, 0);
+const normal = quote(500_000, 3, PHASE_RATES.launch, 0);
+
+assert('3% ao anfitrião', FOUNDING.rates.host === 0.03);
+assert(
+  'taxa do hóspede igual à do lançamento',
+  FOUNDING.rates.guest === PHASE_RATES.launch.guest,
+);
+assert('sem isenção — paga desde a primeira reserva', fund.hostFee > 0);
+
+// Com preço a partir do líquido, uma comissão mais baixa não dá mais ao
+// anfitrião — dá um preço mais baixo ao hóspede. O alojamento de um fundador
+// aparece mais barato na pesquisa pelo mesmo líquido, o que o faz converter
+// melhor. É um benefício a somar ao "fica com 97%".
+assert(
+  'o anfitrião recebe o mesmo líquido',
+  Math.abs(fund.hostPayout - normal.hostPayout) <= 3,
+);
+assert('o hóspede paga menos num alojamento de fundador', fund.guestTotal < normal.guestTotal);
+assert(
+  'a Bazalá ganha menos, mas ganha',
+  fund.commissionGross > 0 && fund.commissionGross < normal.commissionGross,
+);
 
 console.log(
   failures === 0 ? '\nTudo certo.\n' : `\n${failures} verificação(ões) falharam.\n`,
